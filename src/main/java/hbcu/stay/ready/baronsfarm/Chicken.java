@@ -6,19 +6,19 @@ public class Chicken extends Animal implements Produce{
         super(name);
     }
 
-    public void eat(Edible edible) {
+    public Boolean hasBeenFertilized() {
+        return null;
+    }
 
+    public void eat(Edible edible) {
     }
 
     public void makeNoise() {
-
     }
 
+    //Needs to return an Edible Egg...
     public Edible yield() {
         return null;
     }
 
-    public Boolean hasBeenFertilized() {
-        return null;
-    }
 }

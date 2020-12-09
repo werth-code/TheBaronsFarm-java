@@ -1,4 +1,4 @@
 package hbcu.stay.ready.baronsfarm;
 
-public class Tomato implements Edible {
+public class Tomato extends TomatoPlant implements Edible {
 }

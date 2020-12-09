@@ -10,4 +10,5 @@ public class Crop implements Produce {
     public Boolean hasBeenFertilized() {
         return null;
     }
+
 }
