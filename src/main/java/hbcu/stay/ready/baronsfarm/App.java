@@ -1,9 +1,7 @@
 package hbcu.stay.ready.baronsfarm;
 
-import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
 
 public class App {
@@ -16,13 +14,27 @@ public class App {
         Farmer baron = new Farmer("Baron"); //He can now be a farmer.
         Baroness baroness = new Baroness("Baroness"); //She can now fly.
 
+
+        // TODO: 12/10/20 This is the problem..
+
+        //I don't understand how to create a Crop that goes into a CropRow that goes into a Field.. how do I cast this?
+        // Corn corn = new Corn; - Corn extends Crop.
+        // CropRow<Crop>
+        // HashMap Field<CropRow>
+
         //Create our Field, CropRows and Crops
-        ArrayList<Corn> corn = (ArrayList<Corn>) Arrays.asList(new Corn(), new Corn(), new Corn());
+        CropRow cropRow = new CropRow();
+        for(int i = 0; i <= 5; i++) {
+            cropRow.getCropRow().add(new CornStalk());
+        }
+        Field field = new Field("Barons Field 1", cropRow);
 
-        //CropRow cropRow = new CropRow("Corn", corn);
+        CornStalk cornStalk = (CornStalk) field.getCropContainer().get("Barons Field 1").getCropRow().get(0);
+        Corn corn = cornStalk.getCorn();
 
-        //Field baronsField = new Field("Barons Field", cropRow);
-        //System.out.println(baronsField.getCropRow());
+        System.out.println(corn);
+        System.out.println(field.getCropContainer().get("Barons Field 1").getCropRow().get(4));
+
 
         //Create FarmHouse
         List<Person> baronsFarmHouse = Arrays.asList(baron, baroness);

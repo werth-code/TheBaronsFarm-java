@@ -2,8 +2,6 @@ package hbcu.stay.ready.baronsfarm;
 
 import java.util.*;
 
-// TODO: 12/9/20 This should only be accessable to a farmer who is a botanist...
-
 public class Field {
     private Map<String, CropRow> cropRows;
 
@@ -12,7 +10,7 @@ public class Field {
         cropRows.put(name, cropRow);
     }
 
-    public Map<String, CropRow> getCropRow() {
+    public Map<String, CropRow> getCropContainer() {
         return cropRows;
     }
 //    Field(Crop name, List<Crop> crops){
@@ -27,4 +25,3 @@ public class Field {
 //    }
 
 }
-

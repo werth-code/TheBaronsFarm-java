@@ -3,13 +3,14 @@ package hbcu.stay.ready.baronsfarm;
 import java.util.ArrayList;
 
 public class CropRow {
-    private ArrayList<CropRow> cropRows;
+    private ArrayList<Crop> cropRows;
 
-    CropRow(ArrayList<Crop> crop) {
+    CropRow() {
         this.cropRows = new ArrayList<>();
     }
 
-    public ArrayList<CropRow> getCropRow() {
+    public ArrayList<Crop> getCropRow() {
         return cropRows;
     }
 }
+
