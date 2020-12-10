@@ -21,7 +21,7 @@ public class Farm {
         this.farmHouse = people; //new arraylist of these...
         this.stables = horses;
         this.chickenCoop = chickens;
-        this.cropRows = (Map<Crop, CropRow>) new CropRow(crops).getCrops();
+        //this.cropRows = (Map<Crop, CropRow>) new CropRow(crops).getCrops();
     }
 
 }

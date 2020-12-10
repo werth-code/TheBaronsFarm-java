@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Stables {
-    HashMap<String, ArrayList<Horse>> stable;
+    private HashMap<String, ArrayList<Horse>> stable;
 
     Stables(String name, ArrayList<Horse> horses) {
         this.stable = new HashMap<>();
