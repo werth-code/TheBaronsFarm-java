@@ -6,4 +6,8 @@ public abstract class Animal implements Eater, NoiseMaker {
     public Animal(String name) {
         this.name = name;
     }
+
+    public String getName() {
+        return name;
+    }
 }

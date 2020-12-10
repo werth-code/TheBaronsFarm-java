@@ -5,15 +5,15 @@ package hbcu.stay.ready.baronsfarm;
 public class TomatoPlant extends Crop {
     private Tomato tomato;
 
-    TomatoPlant(){
-        this.tomato = new Tomato();
-    }
-
-    public Tomato getTomato() {
-        return tomato;
-    }
-
-    public String getPlantName() {
-        return "Tomato";
-    }
+//    TomatoPlant(){
+//        this.tomato = new Tomato();
+//    }
+//
+//    public Tomato getTomato() {
+//        return tomato;
+//    }
+//
+//    public String getPlantName() {
+//        return "Tomato";
+//    }
 }
