@@ -98,10 +98,10 @@ public class MainApplicationTest {
     @Test
     public void getCropsFromFields() {
         CornStalk cornStalk = (CornStalk) baronsFarmInstance.getFarmFields().getFields().get("Row1").getCropRow().get(0);
-        String actual = cornStalk.getCorn().toString();
+        String actual = cornStalk.toString();
 
         System.out.println(actual);
-        Assert.assertEquals(actual, "Corn");
+        Assert.assertEquals(actual, "CornStalk");
     }
 
     @Test
@@ -237,16 +237,42 @@ public class MainApplicationTest {
 
         System.out.println(actual);
         Assert.assertEquals(true, actual);
-
-
+        
     }
 
     @Test
-    public void testMarkedAsHarvested(){
-
+    public void testCannotHarvestWithoutFertilizing(){
+        CornStalk cornStalk = (CornStalk) baronsFarmInstance.getFarmFields().getFields().get("Row1").getCropRow().get(0);
+        Assert.assertNull(cornStalk.getCorn());
     }
 
+    @Test
+    public void testTuesday() {
+        //Sunday
+        Farmer baron = (Farmer) baronsFarmInstance.getFarmHouse().getPersons().get(0);
+        baronsFarmInstance.getFarmFields().getFields().get("Row1").getCropRow().clear();
+        baronsFarmInstance.getFarmFields().getFields().get("Row2").getCropRow().clear();
 
+        baron.plant(new CornStalk(), baronsFarmInstance.getFarmFields().getFields().get("Row1").getCropRow());
+        baron.plant(new TomatoPlant(), baronsFarmInstance.getFarmFields().getFields().get("Row2").getCropRow());
+
+        CropRow kale = new CropRow();
+        baronsFarmInstance.getFarmFields().getFields().put("Row3", kale);
+        baron.plant(new KalePlant(), baronsFarmInstance.getFarmFields().getFields().get("Row3").getCropRow());
+
+        //Monday
+        Baroness baroness = (Baroness) baronsFarmInstance.getFarmHouse().getPersons().get(1);
+
+        CropRow cropRow2 = baronsFarmInstance.getFarmFields().getFields().get("Row2");
+
+        CropDuster cropDuster = (CropDuster) baronsFarmInstance.getFarmVehicleShed().get(1);
+        cropDuster.fly(baroness);
+        cropDuster.fertilize(cropRow2);
+
+        //Tuesday
+        Tractor tractor = (Tractor) baronsFarmInstance.getFarmVehicleShed().get(0);
+
+    }
 
 
 }

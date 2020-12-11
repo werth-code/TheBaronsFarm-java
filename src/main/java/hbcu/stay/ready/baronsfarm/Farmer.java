@@ -25,6 +25,13 @@ public class Farmer extends Person implements Botanist, Eater, Rider {
         return null;
     }
 
+    //// TODO: 12/11/20 Need to figure out how to implement the yield method in crop here...
+
+    public List<Edible> harvestCrop(CropRow cropRow) {
+        cropRow.getCropRow().forEach(crop -> crop.yield());
+        return cropRow.getCropRow().get(0).getEdibleList();
+    }
+
     public Horse getHorse(String name, ArrayList<Horse> horses) {
         for(Horse horse : horses) {
             if(horse.getName() == name) return horse;
@@ -62,7 +69,7 @@ public class Farmer extends Person implements Botanist, Eater, Rider {
     }
 
     public void makeNoise() {
-
+        System.out.println("...YeeeeHaawwwwwww...");
     }
 
 }

@@ -8,8 +8,14 @@ public class TomatoPlant extends Crop {
     public Tomato getTomato() {
         if(hasBeenFertilized) {
             Tomato tomato = new Tomato();
+            hasBeenHarvested = true;
             return tomato;
         }
         return null;
+    }
+
+    @Override
+    public String toString() {
+        return "TomatoPlant";
     }
 }

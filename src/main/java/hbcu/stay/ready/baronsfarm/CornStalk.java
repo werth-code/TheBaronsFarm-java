@@ -7,7 +7,16 @@ import java.util.HashMap;
 public class CornStalk extends Crop implements Produce {
 
     public Corn getCorn() {
-        Corn corn = new Corn();
-        return corn;
+        if(hasBeenFertilized) {
+            Corn corn = new Corn();
+            hasBeenHarvested = true;
+            return corn;
+        }
+        return null;
+    }
+
+    @Override
+    public String toString() {
+        return "CornStalk";
     }
 }

@@ -6,6 +6,7 @@ public class KalePlant extends Crop {
     public Kale getKale() {
         if(hasBeenFertilized) {
             Kale kale = new Kale();
+            hasBeenHarvested = true;
             return kale;
         }
         return null;
