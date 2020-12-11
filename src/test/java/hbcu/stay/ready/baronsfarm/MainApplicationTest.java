@@ -3,8 +3,6 @@ package hbcu.stay.ready.baronsfarm;
 import org.junit.Assert;
 import org.junit.Test;
 
-import java.util.ArrayList;
-
 public class MainApplicationTest {
     Farm baronsFarmInstance = Baron.buildBaronsFarm();
 
@@ -182,16 +180,32 @@ public class MainApplicationTest {
     }
 
     @Test
-    public void testMonday() {
+    public void testSunday() {
         Farmer baron = (Farmer) baronsFarmInstance.getFarmHouse().getPersons().get(0);
         baronsFarmInstance.getFarmFields().getFields().get("Row1").getCropRow().clear();
         baronsFarmInstance.getFarmFields().getFields().get("Row2").getCropRow().clear();
 
-        baron.plant(new Corn(), baronsFarmInstance.getFarmFields().getFields().get("Row1").getCropRow());
-        baron.plant(new Tomato(), baronsFarmInstance.getFarmFields().getFields().get("Row2").getCropRow());
+        baron.plant(new CornStalk(), baronsFarmInstance.getFarmFields().getFields().get("Row1").getCropRow());
+        baron.plant(new TomatoPlant(), baronsFarmInstance.getFarmFields().getFields().get("Row2").getCropRow());
 
+        CropRow kale = new CropRow();
+        baronsFarmInstance.getFarmFields().getFields().put("Row3", kale);
+        baron.plant(new Kale(), baronsFarmInstance.getFarmFields().getFields().get("Row3").getCropRow());
+
+        String actual = baronsFarmInstance.getFarmFields().getFields().get("Row3").getCropRow().get(12).toString();
+        String expected = "Kale";
+
+        System.out.println(actual);
+
+        Assert.assertEquals(expected, actual);
 
     }
+
+    @Test
+    public void testMonday() {
+
+    }
+
 
 
 
