@@ -2,6 +2,8 @@ package hbcu.stay.ready.baronsfarm;
 
 public class CropDuster implements AirCraft, FarmVehicle{
 
+    private boolean flying;
+
     public void fertilize(CropRow cropRow) {
 
     }
@@ -14,3 +16,5 @@ public class CropDuster implements AirCraft, FarmVehicle{
 
     }
 }
+
+

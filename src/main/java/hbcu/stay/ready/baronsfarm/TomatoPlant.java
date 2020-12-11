@@ -6,7 +6,10 @@ public class TomatoPlant extends Crop {
     private Tomato tomato;
 
     public Tomato getTomato() {
-        Tomato tomato = new Tomato();
-        return tomato;
+        if(hasBeenFertilized()) {
+            Tomato tomato = new Tomato();
+            return tomato;
+        }
+        return null;
     }
 }
