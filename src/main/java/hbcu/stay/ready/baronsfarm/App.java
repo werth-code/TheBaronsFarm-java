@@ -9,7 +9,6 @@ public class App {
     public static void main(String[] args) {
 
         // TODO: 12/10/20 This all needs to be stored inside of a barn..
-
         //Create our people
         Farmer baron = new Farmer("Baron"); //He can now be a farmer.
         Baroness baroness = new Baroness("Baroness"); //She can now fly.
@@ -36,15 +35,15 @@ public class App {
         field.getField().put("Row2", cropRow2);
 
         CornStalk cornStalk = (CornStalk) field.getField().get("Row1").getCropRow().get(0);
-        Corn corn = cornStalk.getCorn();
+        //Corn corn = cornStalk.getCorn();
 
         TomatoPlant tomatoPlant = (TomatoPlant) field.getField().get("Row2").getCropRow().get(3);
-        Tomato tomato = tomatoPlant.getTomato();
+        //Tomato tomato = tomatoPlant.getTomato();
 
-        System.out.println(corn);
+        //System.out.println(corn);
         System.out.println(cornStalk);
 
-        System.out.println(tomato);
+        //System.out.println(tomato);
         System.out.println(tomatoPlant);
 
         //Create FarmHouse
@@ -100,6 +99,10 @@ public class App {
 
         System.out.println(tractor);
         System.out.println(cropDuster);
+
+        Farm farm = new Farm("Baron Farms", farmHouse, mainStable, baronsChickenCoop, field);
+        System.out.println(farm.getChickenCoop().getCoop().get("Barons Chicken Coop 1").get(0).getName()); //this gets the chicken from coop1 and returns her name.
+        System.out.println(farm.getFarmHouse().getPersons().get(0).getName());
 
     }
 }
