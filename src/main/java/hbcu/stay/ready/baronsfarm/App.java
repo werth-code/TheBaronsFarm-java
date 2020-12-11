@@ -1,9 +1,5 @@
 package hbcu.stay.ready.baronsfarm;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
 public class App {
 
     public static void main(String[] args) {
@@ -97,8 +93,8 @@ public class App {
         Farm baronsFarm = Baron.buildBaronsFarm();
         System.out.println(baronsFarm.getFarmHouse().getPersons().get(0).getName());
         System.out.println(baronsFarm.getFarmVehicleShed().get(0));
-        System.out.println(baronsFarm.getChickenCoop().getCoop().get("Barons Chicken Coop 1").get(0).getName());
-        System.out.println(baronsFarm.getStables().getStable().get("Stable 1").get(0).getName());
+        System.out.println(baronsFarm.getAllChickenCoops().getCoop().get("Barons Chicken Coop 1").get(0).getName());
+        System.out.println(baronsFarm.getAllFarmStables().getEachStable().get("Stable 1").get(0).getName());
 
     }
 }

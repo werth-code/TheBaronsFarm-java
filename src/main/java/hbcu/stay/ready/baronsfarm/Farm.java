@@ -1,7 +1,9 @@
 package hbcu.stay.ready.baronsfarm;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Farm {
 
@@ -25,6 +27,29 @@ public class Farm {
         farmVehicleShed = new ArrayList<>();
     }
 
+    public void listStables() {
+        HashMap<String, ArrayList<Horse>> stables = this.stables.getEachStable();
+        for(Object horses : stables.entrySet()) {
+            System.out.println(horses);
+        }
+    }
+
+    public Stables getStables() {
+        HashMap<String, ArrayList<Horse>> stables = this.stables.getEachStable();
+        for(Object horses : stables.entrySet()) {
+            return (Stables) horses;
+        }
+        return null;
+    }
+
+    public Horse getHorse(String name, ArrayList<Horse> horses) {
+        for(Horse horse : horses) {
+            if(horse.getName() == name) return horse;
+            break;
+        }
+        return null;
+    }
+
     public List<FarmVehicle> getFarmVehicleShed() {
         return farmVehicleShed;
     }
@@ -41,31 +66,16 @@ public class Farm {
         return farmHouse;
     }
 
-    public void setFarmHouse(FarmHouse farmHouse) {
-        this.farmHouse = farmHouse;
-    }
-
-    public Stables getStables() {
+    public Stables getAllFarmStables() {
         return stables;
     }
 
-    public void setStables(Stables stables) {
-        this.stables = stables;
-    }
-
-    public ChickenCoop getChickenCoop() {
+    public ChickenCoop getAllChickenCoops() {
         return chickenCoop;
     }
 
-    public void setChickenCoop(ChickenCoop chickenCoop) {
-        this.chickenCoop = chickenCoop;
-    }
-
-    public Field getField() {
+    public Field getFarmFields() {
         return field;
     }
 
-    public void setField(Field field) {
-        this.field = field;
-    }
 }

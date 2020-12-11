@@ -10,7 +10,7 @@ public class Field {
         cropRows.put(name, cropRow);
     }
 
-    public Map<String, CropRow> getField() {
+    public Map<String, CropRow> getFields() {
         return cropRows;
     }
 //    Field(Crop name, List<Crop> crops){

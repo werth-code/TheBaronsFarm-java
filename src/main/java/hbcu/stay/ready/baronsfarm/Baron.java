@@ -28,7 +28,7 @@ public class Baron extends Farmer  {
         }
 
         Field field = new Field("Row1", cropRow);
-        field.getField().put("Row2", cropRow2);
+        field.getFields().put("Row2", cropRow2);
 
         //Create FarmHouse
         List<Person> baronsFarmHouse = Arrays.asList(baron, baroness);
@@ -48,8 +48,8 @@ public class Baron extends Farmer  {
         }
 
         Stables mainStable = new Stables("Stable 1", baronStable1);
-        mainStable.getStable().put("Stable 2", baronStable2);
-        mainStable.getStable().put("Stable 3", baronStable3);
+        mainStable.getEachStable().put("Stable 2", baronStable2);
+        mainStable.getEachStable().put("Stable 3", baronStable3);
 
         //Create Our ChickenCoops
         ArrayList<Chicken> chickenCoop1 = new ArrayList<>();

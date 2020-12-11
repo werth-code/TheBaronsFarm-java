@@ -10,7 +10,7 @@ public class Horse extends Animal implements Rideable {
 
     public void mount(Rider rider) {
         if(!isBeingRidden) {
-            System.out.println(rider + " has mounted " + super.getName().toUpperCase() + " our faithful and trusty horse!");
+            System.out.println(rider.toString() + " has mounted " + super.getName().toUpperCase() + " our faithful and trusty horse!");
             makeNoise();
             currentRider = rider;
             isBeingRidden = true;
@@ -30,8 +30,8 @@ public class Horse extends Animal implements Rideable {
 
 
     @Override
-    public void eat(Edible edible) {
-        System.out.println(super.getName().toUpperCase() +  "...chomp...crunch...num... likes " + edible.getClass());
+    public void canEat(Edible edible) {
+        System.out.println("...chomp...crunch...num... " + super.getName().toUpperCase() + " likes " + edible.toString());
     }
 
     @Override
