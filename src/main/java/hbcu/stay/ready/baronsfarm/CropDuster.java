@@ -4,6 +4,8 @@ public class CropDuster implements AirCraft, FarmVehicle{
     private boolean flying = false;
     private Pilot pilot;
 
+    // TODO: 12/11/20 Working on getting each plant fertilized....
+
     public void fertilize(CropRow cropRow) {
         if(flying) {
             cropRow.getCropRow().forEach(plant -> plant.setHasBeenFertilized(true));

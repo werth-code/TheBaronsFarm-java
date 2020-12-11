@@ -198,16 +198,51 @@ public class MainApplicationTest {
         System.out.println(actual);
 
         Assert.assertEquals(expected, actual);
+    }
 
+    @Test
+    public void testFlyAndLandCropDuster() {
+        Baroness baroness = (Baroness) baronsFarmInstance.getFarmHouse().getPersons().get(1);
+        CropDuster cropDuster = (CropDuster) baronsFarmInstance.getFarmVehicleShed().get(1);
+        cropDuster.fly(baroness);
+
+        Pilot actual = cropDuster.land();
+        Pilot expected = baroness;
+
+        System.out.println(actual);
+        Assert.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void harvestWithoutFertilizing() {
+        TomatoPlant tomatoPlant = (TomatoPlant) baronsFarmInstance.getFarmFields().getFields().get("Row2").getCropRow().get(0);
+
+        Boolean actual = tomatoPlant.getHasBeenFertilized();
+
+        System.out.println(actual);
+        Assert.assertEquals(false, actual);
     }
 
     @Test
     public void testMonday() {
-        Farmer baron = (Farmer) baronsFarmInstance.getFarmHouse().getPersons().get(0);
         Baroness baroness = (Baroness) baronsFarmInstance.getFarmHouse().getPersons().get(1);
 
+        CropRow cropRow2 = baronsFarmInstance.getFarmFields().getFields().get("Row2");
+
         CropDuster cropDuster = (CropDuster) baronsFarmInstance.getFarmVehicleShed().get(1);
-        //cropDuster.fly(baroness);
+        cropDuster.fly(baroness);
+        cropDuster.fertilize(cropRow2);
+
+        Boolean actual = cropRow2.getCropRow().get(5).getHasBeenFertilized();
+
+        System.out.println(actual);
+        Assert.assertEquals(true, actual);
+
+
+    }
+
+    @Test
+    public void testMarkedAsHarvested(){
 
     }
 
