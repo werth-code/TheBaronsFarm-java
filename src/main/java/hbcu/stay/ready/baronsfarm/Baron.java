@@ -66,10 +66,10 @@ public class Baron extends Farmer  {
             else chickenCoop4.add(new Chicken(name));
         }
 
-        ChickenCoop baronsChickenCoop = new ChickenCoop("Barons Chicken Coop 1", chickenCoop1);
-        baronsChickenCoop.getCoop().put("Barons Chicken Coop 2", chickenCoop2);
-        baronsChickenCoop.getCoop().put("Barons Chicken Coop 3", chickenCoop3);
-        baronsChickenCoop.getCoop().put("Barons Chicken Coop 4", chickenCoop4);
+        ChickenCoop baronsChickenCoop = new ChickenCoop("Chicken Coop 1", chickenCoop1);
+        baronsChickenCoop.getCoop().put("Chicken Coop 2", chickenCoop2);
+        baronsChickenCoop.getCoop().put("Chicken Coop 3", chickenCoop3);
+        baronsChickenCoop.getCoop().put("Chicken Coop 4", chickenCoop4);
 
         //Farm Vehicles
         Tractor tractor = new Tractor();

@@ -98,6 +98,7 @@ public class App {
         System.out.println(baronsFarm.getFarmHouse().getPersons().get(0).getName());
         System.out.println(baronsFarm.getFarmVehicleShed().get(0));
         System.out.println(baronsFarm.getChickenCoop().getCoop().get("Barons Chicken Coop 1").get(0).getName());
+        System.out.println(baronsFarm.getStables().getStable().get("Stable 1").get(0).getName());
 
     }
 }
