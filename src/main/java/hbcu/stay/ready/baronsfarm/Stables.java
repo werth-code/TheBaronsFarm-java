@@ -11,7 +11,7 @@ public class Stables {
         stable.put(name, horses);
     }
 
-    public HashMap<String, ArrayList<Horse>> getStable() {
+    public HashMap<String, ArrayList<Horse>> getEachStable() {
         return stable;
     }
 }
