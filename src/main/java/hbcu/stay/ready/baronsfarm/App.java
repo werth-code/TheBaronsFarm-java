@@ -13,7 +13,6 @@ public class App {
         Farmer baron = new Farmer("Baron"); //He can now be a farmer.
         Baroness baroness = new Baroness("Baroness"); //She can now fly.
 
-
         // TODO: 12/10/20 This is the problem..
         //I don't understand how to create a Crop that goes into a CropRow that goes into a Field.. how do I cast this?
         // Corn corn = new Corn; - Corn extends Crop.
@@ -92,17 +91,17 @@ public class App {
 
         System.out.println(baronsChickenCoop.getCoop().get("Barons Chicken Coop 2").get(2).getName());
 
-
         //Farm Vehicles
         Tractor tractor = new Tractor();
         CropDuster cropDuster = new CropDuster();
 
-        System.out.println(tractor);
-        System.out.println(cropDuster);
-
         Farm farm = new Farm("Baron Farms", farmHouse, mainStable, baronsChickenCoop, field);
+        farm.getFarmVehicleShed().add(tractor);
+        farm.getFarmVehicleShed().add(cropDuster);
+
         System.out.println(farm.getChickenCoop().getCoop().get("Barons Chicken Coop 1").get(0).getName()); //this gets the chicken from coop1 and returns her name.
         System.out.println(farm.getFarmHouse().getPersons().get(0).getName());
+
 
     }
 }

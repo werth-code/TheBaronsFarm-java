@@ -10,7 +10,7 @@ public class Farm {
     private Stables stables;
     private ChickenCoop chickenCoop;
     private Field field;
-
+    private List<FarmVehicle> farmVehicleShed;
 
     Farm(String name) {
         this.name = name;
@@ -22,6 +22,11 @@ public class Farm {
         this.stables = stables;
         this.chickenCoop = chickenCoop;
         this.field = field;
+        farmVehicleShed = new ArrayList<>();
+    }
+
+    public List<FarmVehicle> getFarmVehicleShed() {
+        return farmVehicleShed;
     }
 
     public String getName() {
