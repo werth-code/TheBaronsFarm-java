@@ -10,10 +10,6 @@ public class CropDuster implements AirCraft, FarmVehicle{
 
     }
 
-    public void operate() {
-
-    }
-
     public void operate(Farm farm) {
 
     }

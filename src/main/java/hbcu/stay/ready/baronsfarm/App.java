@@ -16,7 +16,6 @@ public class App {
 
 
         // TODO: 12/10/20 This is the problem..
-
         //I don't understand how to create a Crop that goes into a CropRow that goes into a Field.. how do I cast this?
         // Corn corn = new Corn; - Corn extends Crop.
         // CropRow<Crop>
@@ -27,14 +26,26 @@ public class App {
         for(int i = 0; i <= 5; i++) {
             cropRow.getCropRow().add(new CornStalk());
         }
-        Field field = new Field("Barons Field 1", cropRow);
 
-        CornStalk cornStalk = (CornStalk) field.getCropContainer().get("Barons Field 1").getCropRow().get(0);
+        CropRow cropRow2 = new CropRow();
+        for(int i = 0; i <= 5; i++) {
+            cropRow2.getCropRow().add(new TomatoPlant());
+        }
+
+        Field field = new Field("Row1", cropRow);
+        field.getField().put("Row2", cropRow2);
+
+        CornStalk cornStalk = (CornStalk) field.getField().get("Row1").getCropRow().get(0);
         Corn corn = cornStalk.getCorn();
 
-        System.out.println(corn);
-        System.out.println(field.getCropContainer().get("Barons Field 1").getCropRow().get(4));
+        TomatoPlant tomatoPlant = (TomatoPlant) field.getField().get("Row2").getCropRow().get(3);
+        Tomato tomato = tomatoPlant.getTomato();
 
+        System.out.println(corn);
+        System.out.println(cornStalk);
+
+        System.out.println(tomato);
+        System.out.println(tomatoPlant);
 
         //Create FarmHouse
         List<Person> baronsFarmHouse = Arrays.asList(baron, baroness);
@@ -53,10 +64,6 @@ public class App {
             else if (i > 3 && i < 7) baronStable2.add(new Horse(name));
             else baronStable3.add(new Horse(name));
         }
-
-        // TODO: 12/10/20 This is what I don't understand when using generics..
-        //FarmHousing farmHousing = new FarmHousing("Stable", baronStable1);
-        //System.out.println(farmHousing.getStored().get("Stable").get(0));
 
         Stables mainStable = new Stables("Stable 1", baronStable1);
         mainStable.getStable().put("Stable 2", baronStable2);
@@ -88,24 +95,11 @@ public class App {
 
 
         //Farm Vehicles
-//            Tractor tractor = new Tractor();
-//            CropDuster cropDuster = new CropDuster();
-//
-//            //Plants
-//            TomatoPlant tomatoPlant = new TomatoPlant();
-//            Tomato tomato = tomatoPlant.getTomato();
-//
-//            CornStalk cornStalk = new CornStalk();
-//            Corn corn = cornStalk.getCorn();
-//
-//            List<Crop> cropArrayList = Arrays.asList(tomato, corn);
+        Tractor tractor = new Tractor();
+        CropDuster cropDuster = new CropDuster();
 
-        //cropArrayList.forEach(System.out::println);
-
-        //CropRow cropRow = new CropRow(cropArrayList);
-
-        //Field field = new Field(cropRow.getCrops());
-
+        System.out.println(tractor);
+        System.out.println(cropDuster);
 
     }
 }
