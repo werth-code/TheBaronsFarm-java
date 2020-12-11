@@ -190,10 +190,10 @@ public class MainApplicationTest {
 
         CropRow kale = new CropRow();
         baronsFarmInstance.getFarmFields().getFields().put("Row3", kale);
-        baron.plant(new Kale(), baronsFarmInstance.getFarmFields().getFields().get("Row3").getCropRow());
+        baron.plant(new KalePlant(), baronsFarmInstance.getFarmFields().getFields().get("Row3").getCropRow());
 
         String actual = baronsFarmInstance.getFarmFields().getFields().get("Row3").getCropRow().get(12).toString();
-        String expected = "Kale";
+        String expected = "KalePlant";
 
         System.out.println(actual);
 
@@ -203,6 +203,11 @@ public class MainApplicationTest {
 
     @Test
     public void testMonday() {
+        Farmer baron = (Farmer) baronsFarmInstance.getFarmHouse().getPersons().get(0);
+        Baroness baroness = (Baroness) baronsFarmInstance.getFarmHouse().getPersons().get(1);
+
+        CropDuster cropDuster = (CropDuster) baronsFarmInstance.getFarmVehicleShed().get(1);
+        //cropDuster.fly(baroness);
 
     }
 
