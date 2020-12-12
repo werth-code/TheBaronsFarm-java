@@ -50,6 +50,10 @@ public class Farm {
         return null;
     }
 
+    public ArrayList<Crop> getCrops(String rowName) {
+       return this.getFarmFields().getFields().get(rowName).getCropRow();
+    }
+
     public List<FarmVehicle> getFarmVehicleShed() {
         return farmVehicleShed;
     }

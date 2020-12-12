@@ -1,25 +1,26 @@
 package hbcu.stay.ready.baronsfarm;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Crop implements Produce {
     public Boolean hasBeenFertilized = false;
     public Boolean hasBeenHarvested = false;
-    public List<Edible> edibleList;
 
-    public Edible yield() {
+
+    public Crop yield() {
         if(hasBeenFertilized) {
-            Crop crop = new Crop();
+            Crop crop;
+            if(this.getClass().equals(CornStalk.class)) crop = new Corn();
+            else if(this.getClass().equals(TomatoPlant.class)) crop = new Tomato();
+            else crop = new Kale();
             hasBeenHarvested = true;
-            edibleList.add((Edible) crop);
-            return (Edible) crop;
+            System.out.println(crop.toString());
+            return crop;
         }
         return null;
     }
 
-    public List<Edible> getEdibleList() {
-        return edibleList;
-    }
 
     public Boolean getHasBeenFertilized() {
         return hasBeenFertilized;

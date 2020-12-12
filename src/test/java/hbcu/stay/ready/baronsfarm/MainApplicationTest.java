@@ -3,6 +3,8 @@ package hbcu.stay.ready.baronsfarm;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.util.ArrayList;
+
 public class MainApplicationTest {
     Farm baronsFarmInstance = Baron.buildBaronsFarm();
 
@@ -263,14 +265,32 @@ public class MainApplicationTest {
         //Monday
         Baroness baroness = (Baroness) baronsFarmInstance.getFarmHouse().getPersons().get(1);
 
+        CropRow cropRow1 = baronsFarmInstance.getFarmFields().getFields().get("Row1");
         CropRow cropRow2 = baronsFarmInstance.getFarmFields().getFields().get("Row2");
+        CropRow cropRow3 = baronsFarmInstance.getFarmFields().getFields().get("Row3");
 
         CropDuster cropDuster = (CropDuster) baronsFarmInstance.getFarmVehicleShed().get(1);
         cropDuster.fly(baroness);
+        cropDuster.fertilize(cropRow1);
         cropDuster.fertilize(cropRow2);
+        cropDuster.fertilize(cropRow3);
 
         //Tuesday
         Tractor tractor = (Tractor) baronsFarmInstance.getFarmVehicleShed().get(0);
+
+        // TODO: 12/11/20 create a method in tractor that calls the yield method on crop and somehow get back a Tomato, Corn or Kale for each plant.
+
+        //somehow get each plant and run a function on each plant...
+
+        ArrayList<Crop> crops1 = baronsFarmInstance.getCrops("Row1");
+        ArrayList<Crop> crops2 = baronsFarmInstance.getCrops("Row2");
+        ArrayList<Crop> crops3 = baronsFarmInstance.getCrops("Row3");
+
+        crops1.forEach(ele -> ele.yield());
+        crops2.forEach(ele -> ele.yield());
+        crops3.forEach(ele -> ele.yield());
+
+
 
     }
 
