@@ -9,7 +9,7 @@ public class CropDuster implements AirCraft, FarmVehicle{
     public void fertilize(CropRow cropRow) {
         if(flying) {
             cropRow.getCropRow().forEach(plant -> plant.setHasBeenFertilized(true));
-            System.out.println("Your Crops Have Been Fertilized & Are Ready For Harvest.");
+            System.out.println("Fertilizing... " + cropRow.toString() + " ....Ready For Harvest.");
         }
     }
 

@@ -25,10 +25,6 @@ public class Farmer extends Person implements Botanist, Eater, Rider {
         return null;
     }
 
-    public List<Edible> harvestCrop(CropRow cropRow) {
-    return null;
-    }
-
     public Horse getHorse(String name, ArrayList<Horse> horses) {
         for(Horse horse : horses) {
             if(horse.getName() == name) return horse;

@@ -12,5 +12,10 @@ public class CropRow {
     public ArrayList<Crop> getCropRow() {
         return cropRow;
     }
+
+    @Override
+    public String toString() {
+        return "Crops" + cropRow;
+    }
 }
 

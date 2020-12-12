@@ -16,7 +16,6 @@ public class Chicken extends Animal implements Produce, NoiseMaker {
         System.out.println("Cluck.. cluck..");
     }
 
-    //Needs to return an Edible Egg...
     public Edible yield() {
         if(!hasBeenFertilized) {
             Egg egg = new Egg();

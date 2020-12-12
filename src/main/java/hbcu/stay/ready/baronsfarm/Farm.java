@@ -54,6 +54,10 @@ public class Farm {
        return this.getFarmFields().getFields().get(rowName).getCropRow();
     }
 
+    public ArrayList<Chicken> getChickenCoop(String coopName) {
+        return this.getAllChickenCoops().getCoop().get(coopName);
+    }
+
     public List<FarmVehicle> getFarmVehicleShed() {
         return farmVehicleShed;
     }
