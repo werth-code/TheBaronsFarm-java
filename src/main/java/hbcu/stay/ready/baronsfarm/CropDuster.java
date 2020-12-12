@@ -14,13 +14,13 @@ public class CropDuster implements AirCraft, FarmVehicle{
     }
 
     public void fly(Pilot pilot) {
-        System.out.println("....WHOOOOOOOOSSSSSSSSSSHHHHHHHHHHH....");
+        System.out.println("....WHOOOOOOOOSSSSSSSSSSHHHHHHHHHHH.... Crop Duster Is Flying.");
         this.pilot = pilot;
         flying = true;
     }
 
     public Pilot land() {
-        System.out.println("....BUMP...BUmp...bump...");
+        System.out.println("....BUMP...BUmp...bump... Landed Safely");
         flying = false;
         return pilot;
     }

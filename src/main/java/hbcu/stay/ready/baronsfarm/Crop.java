@@ -15,7 +15,6 @@ public class Crop implements Produce {
             else if(this.getClass().equals(TomatoPlant.class)) crop = new Tomato();
             else crop = new Kale();
             hasBeenHarvested = true;
-            System.out.println(crop.toString());
             return crop;
         }
         return null;

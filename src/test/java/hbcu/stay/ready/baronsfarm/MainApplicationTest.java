@@ -119,9 +119,7 @@ public class MainApplicationTest {
 
     @Test
     public void testGetEgg() {
-        Farmer baron = (Farmer) baronsFarmInstance.getFarmHouse().getPersons().get(0);
         Chicken chicken = baronsFarmInstance.getAllChickenCoops().getCoop().get("Chicken Coop 1").get(0);
-        //baron.addRooster(chicken);
         Egg egg = (Egg) chicken.yield();
 
         System.out.println(egg);
@@ -266,32 +264,23 @@ public class MainApplicationTest {
         Baroness baroness = (Baroness) baronsFarmInstance.getFarmHouse().getPersons().get(1);
 
         CropRow cropRow1 = baronsFarmInstance.getFarmFields().getFields().get("Row1");
-        CropRow cropRow2 = baronsFarmInstance.getFarmFields().getFields().get("Row2");
-        CropRow cropRow3 = baronsFarmInstance.getFarmFields().getFields().get("Row3");
 
         CropDuster cropDuster = (CropDuster) baronsFarmInstance.getFarmVehicleShed().get(1);
         cropDuster.fly(baroness);
         cropDuster.fertilize(cropRow1);
-        cropDuster.fertilize(cropRow2);
-        cropDuster.fertilize(cropRow3);
+        cropDuster.land();
 
         //Tuesday
         Tractor tractor = (Tractor) baronsFarmInstance.getFarmVehicleShed().get(0);
 
-        // TODO: 12/11/20 create a method in tractor that calls the yield method on crop and somehow get back a Tomato, Corn or Kale for each plant.
-
-        //somehow get each plant and run a function on each plant...
-
         ArrayList<Crop> crops1 = baronsFarmInstance.getCrops("Row1");
-        ArrayList<Crop> crops2 = baronsFarmInstance.getCrops("Row2");
-        ArrayList<Crop> crops3 = baronsFarmInstance.getCrops("Row3");
 
-        crops1.forEach(ele -> ele.yield());
-        crops2.forEach(ele -> ele.yield());
-        crops3.forEach(ele -> ele.yield());
+        tractor.operate(baronsFarmInstance);
+        ArrayList<Crop> harvestedCrops = (ArrayList<Crop>) tractor.harvest(crops1);
+        harvestedCrops.forEach(crop -> System.out.println(crop + " Has Been Harvested."));
+        tractor.turnOff();
 
-
-
+        Assert.assertNotNull(harvestedCrops);
     }
 
 
