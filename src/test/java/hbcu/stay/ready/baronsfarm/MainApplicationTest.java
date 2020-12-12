@@ -100,10 +100,10 @@ public class MainApplicationTest {
     @Test
     public void getCropsFromFields() {
         CornStalk cornStalk = (CornStalk) baronsFarmInstance.getFarmFields().getFields().get("Row1").getCropRow().get(0);
-        String actual = cornStalk.getCorn().toString();
+        String actual = cornStalk.toString();
 
         System.out.println(actual);
-        Assert.assertEquals(actual, "Corn");
+        Assert.assertEquals(actual, "CornStalk");
     }
 
     @Test
@@ -119,9 +119,7 @@ public class MainApplicationTest {
 
     @Test
     public void testGetEgg() {
-        Farmer baron = (Farmer) baronsFarmInstance.getFarmHouse().getPersons().get(0);
         Chicken chicken = baronsFarmInstance.getAllChickenCoops().getCoop().get("Chicken Coop 1").get(0);
-        //baron.addRooster(chicken);
         Egg egg = (Egg) chicken.yield();
 
         System.out.println(egg);
@@ -182,17 +180,110 @@ public class MainApplicationTest {
     }
 
     @Test
-    public void testMonday() {
+    public void testSunday() {
         Farmer baron = (Farmer) baronsFarmInstance.getFarmHouse().getPersons().get(0);
         baronsFarmInstance.getFarmFields().getFields().get("Row1").getCropRow().clear();
         baronsFarmInstance.getFarmFields().getFields().get("Row2").getCropRow().clear();
 
-        baron.plant(new Corn(), baronsFarmInstance.getFarmFields().getFields().get("Row1").getCropRow());
-        baron.plant(new Tomato(), baronsFarmInstance.getFarmFields().getFields().get("Row2").getCropRow());
+        baron.plant(new CornStalk(), baronsFarmInstance.getFarmFields().getFields().get("Row1").getCropRow());
+        baron.plant(new TomatoPlant(), baronsFarmInstance.getFarmFields().getFields().get("Row2").getCropRow());
 
+        CropRow kale = new CropRow();
+        baronsFarmInstance.getFarmFields().getFields().put("Row3", kale);
+        baron.plant(new KalePlant(), baronsFarmInstance.getFarmFields().getFields().get("Row3").getCropRow());
 
+        String actual = baronsFarmInstance.getFarmFields().getFields().get("Row3").getCropRow().get(12).toString();
+        String expected = "KalePlant";
+
+        System.out.println(actual);
+
+        Assert.assertEquals(expected, actual);
     }
 
+    @Test
+    public void testFlyAndLandCropDuster() {
+        Baroness baroness = (Baroness) baronsFarmInstance.getFarmHouse().getPersons().get(1);
+        CropDuster cropDuster = (CropDuster) baronsFarmInstance.getFarmVehicleShed().get(1);
+        cropDuster.fly(baroness);
+
+        Pilot actual = cropDuster.land();
+        Pilot expected = baroness;
+
+        System.out.println(actual);
+        Assert.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void harvestWithoutFertilizing() {
+        TomatoPlant tomatoPlant = (TomatoPlant) baronsFarmInstance.getFarmFields().getFields().get("Row2").getCropRow().get(0);
+
+        Boolean actual = tomatoPlant.getHasBeenFertilized();
+
+        System.out.println(actual);
+        Assert.assertEquals(false, actual);
+    }
+
+    @Test
+    public void testMonday() {
+        Baroness baroness = (Baroness) baronsFarmInstance.getFarmHouse().getPersons().get(1);
+
+        CropRow cropRow2 = baronsFarmInstance.getFarmFields().getFields().get("Row2");
+
+        CropDuster cropDuster = (CropDuster) baronsFarmInstance.getFarmVehicleShed().get(1);
+        cropDuster.fly(baroness);
+        cropDuster.fertilize(cropRow2);
+
+        Boolean actual = cropRow2.getCropRow().get(5).getHasBeenFertilized();
+
+        System.out.println(actual);
+        Assert.assertEquals(true, actual);
+        
+    }
+
+    @Test
+    public void testCannotHarvestWithoutFertilizing(){
+        CornStalk cornStalk = (CornStalk) baronsFarmInstance.getFarmFields().getFields().get("Row1").getCropRow().get(0);
+        Assert.assertNull(cornStalk.getCorn());
+    }
+
+    @Test
+    public void testTuesday() {
+        //Sunday
+        Farmer baron = (Farmer) baronsFarmInstance.getFarmHouse().getPersons().get(0);
+        baronsFarmInstance.getFarmFields().getFields().get("Row1").getCropRow().clear();
+        baronsFarmInstance.getFarmFields().getFields().get("Row2").getCropRow().clear();
+
+        baron.plant(new CornStalk(), baronsFarmInstance.getFarmFields().getFields().get("Row1").getCropRow());
+        baron.plant(new TomatoPlant(), baronsFarmInstance.getFarmFields().getFields().get("Row2").getCropRow());
+
+        CropRow kale = new CropRow();
+        baronsFarmInstance.getFarmFields().getFields().put("Row3", kale);
+        baron.plant(new KalePlant(), baronsFarmInstance.getFarmFields().getFields().get("Row3").getCropRow());
+
+        //Monday
+        Baroness baroness = (Baroness) baronsFarmInstance.getFarmHouse().getPersons().get(1);
+
+        CropRow cropRow1 = baronsFarmInstance.getFarmFields().getFields().get("Row1");
+
+        CropDuster cropDuster = (CropDuster) baronsFarmInstance.getFarmVehicleShed().get(1);
+        cropDuster.fly(baroness);
+        cropDuster.fertilize(cropRow1);
+        cropDuster.land();
+
+        //Tuesday
+        Tractor tractor = (Tractor) baronsFarmInstance.getFarmVehicleShed().get(0);
+
+        //TODO  this is a new function to make it easier to access crop rows.. Improve existing code and clean up methods.. Make commandLine game out of this...
+        //TODO Add a chicken when BoBo the rooster visits a Chicken.
+        ArrayList<Crop> crops1 = baronsFarmInstance.getCrops("Row1");
+
+        tractor.operate(baronsFarmInstance);
+        ArrayList<Crop> harvestedCrops = (ArrayList<Crop>) tractor.harvest(crops1);
+        harvestedCrops.forEach(crop -> System.out.println(crop + " Has Been Harvested."));
+        tractor.turnOff();
+
+        Assert.assertNotNull(harvestedCrops);
+    }
 
 
 }

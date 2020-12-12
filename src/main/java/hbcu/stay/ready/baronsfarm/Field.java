@@ -13,15 +13,5 @@ public class Field {
     public Map<String, CropRow> getFields() {
         return cropRows;
     }
-//    Field(Crop name, List<Crop> crops){
-//        fillField(name, crops);
-//    }
-
-
-//    public void fillField(Crop name, List<Crop> crops) {
-//        cropRows = new HashMap<Crop, CropRow>();
-//        CropRow cropRow = new CropRow(crops);
-//        Arrays.asList(crops).forEach(crop -> cropRows.put(name, (CropRow) cropRow.getCrops()));
-//    }
 
 }
