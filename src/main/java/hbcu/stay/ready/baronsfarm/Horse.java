@@ -28,6 +28,9 @@ public class Horse extends Animal implements Rideable {
         return null;
     }
 
+    public Boolean getBeingRidden() {
+        return isBeingRidden;
+    }
 
     @Override
     public void canEat(Edible edible) {

@@ -13,6 +13,10 @@ public class CropRow {
         return cropRow;
     }
 
+    public void addCrop(Crop crop) {
+        cropRow.add(crop);
+    }
+
     @Override
     public String toString() {
         return "Crops" + cropRow;

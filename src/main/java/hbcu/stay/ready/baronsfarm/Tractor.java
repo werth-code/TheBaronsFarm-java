@@ -14,14 +14,14 @@ public class Tractor implements FarmVehicle {
         else System.out.println("You Are Using The Tractor... Are You Okay!?");
     }
 
-    public List<Crop> harvest(ArrayList<Crop> crops) {
+    public CropRow harvest(CropRow crops) {
         if(isOperating == false) {
             System.out.println("Turn On Tractor First.");
             return null;
         }
-        ArrayList<Crop> harvestedCrops = new ArrayList<>();
-        for(Crop crop : crops) {
-            harvestedCrops.add(crop.yield());
+        CropRow harvestedCrops = new CropRow();
+        for(Crop crop : crops.getCropRow()) {
+            harvestedCrops.addCrop(crop.yield());
         }
         System.out.println("Harvesting... Vegetables" + harvestedCrops.toString());
         return harvestedCrops;

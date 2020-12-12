@@ -3,15 +3,12 @@ package hbcu.stay.ready.baronsfarm;
 import org.junit.Assert;
 import org.junit.Test;
 
-import java.util.ArrayList;
-import java.util.function.ToDoubleBiFunction;
-
 public class MainApplicationTest {
     Farm baronsFarmInstance = Baron.buildBaronsFarm();
 
     @Test
     public void testGetBaronsFarmInstance() {
-        String actual = baronsFarmInstance.getFarmHouse().getPersons().get(0).getName();
+        String actual = baronsFarmInstance.getPerson("Baron").getName();
         System.out.println(actual);
         String expected = "Baron";
         Assert.assertEquals(expected, actual);
@@ -19,7 +16,7 @@ public class MainApplicationTest {
 
     @Test
     public void testGetChicken() {
-        String actual = baronsFarmInstance.getAllChickenCoops().getCoop().get("Chicken Coop 1").get(0).getName();
+        String actual = baronsFarmInstance.getChickenCoop("Chicken Coop 1").get(0).getName();
         System.out.println(actual);
         String expected = "HenniferLopez";
         Assert.assertEquals(expected, actual);
@@ -27,7 +24,7 @@ public class MainApplicationTest {
 
     @Test
     public void testGetHorse() {
-        String actual = baronsFarmInstance.getAllFarmStables().getEachStable().get("Stable 1").get(0).getName();
+        String actual = baronsFarmInstance.getStable("Stable 1").get(0).getName();
         System.out.println(actual);
         String expected = "Odi";
         Assert.assertEquals(expected, actual);
@@ -35,63 +32,66 @@ public class MainApplicationTest {
 
     @Test
     public void testMountHorse() {
-        Farmer baron = (Farmer) baronsFarmInstance.getFarmHouse().getPersons().get(0);
-        baronsFarmInstance.getAllFarmStables().getEachStable().get("Stable 1").get(0).mount(baron);
+        Farmer baron = (Farmer) baronsFarmInstance.getPerson("Baron");
+        baronsFarmInstance.getStable("Stable 1").get(0).mount(baron);
 
-        Rider actual = baronsFarmInstance.getAllFarmStables().getEachStable().get("Stable 1").get(0).disMount();
+        Rider actual = baronsFarmInstance.getStable("Stable 1").get(0).disMount();
 
         Assert.assertEquals(baron, actual);
     }
 
     @Test
     public void testMountHorseAlreadyMounted() {
-        Farmer baron = (Farmer) baronsFarmInstance.getFarmHouse().getPersons().get(0);
-        baronsFarmInstance.getAllFarmStables().getEachStable().get("Stable 1").get(0).mount(baron);
-        baronsFarmInstance.getAllFarmStables().getEachStable().get("Stable 1").get(0).mount(baron);
+        Farmer baron = (Farmer) baronsFarmInstance.getPerson("Baron");
+        Horse horse = baronsFarmInstance.getStable("Stable 1").get(0);
+
+        horse.mount(baron);
+
+        Assert.assertTrue(horse.getBeingRidden());
     }
 
     @Test
     public void testDismount() {
-        Farmer baron = (Farmer) baronsFarmInstance.getFarmHouse().getPersons().get(0);
-        baronsFarmInstance.getAllFarmStables().getEachStable().get("Stable 1").get(0).mount(baron);
-        baronsFarmInstance.getAllFarmStables().getEachStable().get("Stable 1").get(0).disMount();
+        Farmer baron = (Farmer) baronsFarmInstance.getPerson("Baron");
+        baronsFarmInstance.getStable("Stable 1").get(0).mount(baron);
+        baronsFarmInstance.getStable("Stable 1").get(0).disMount();
     }
 
     @Test
     public void testDismountAlreadyDismounted() {
-        Baroness baroness = (Baroness) baronsFarmInstance.getFarmHouse().getPersons().get(1);
-        baronsFarmInstance.getAllFarmStables().getEachStable().get("Stable 1").get(0).mount(baroness);
+        Baroness baroness = (Baroness) baronsFarmInstance.getPerson("Baroness");
+        baronsFarmInstance.getStable("Stable 1").get(0).mount(baroness);
 
-        baronsFarmInstance.getAllFarmStables().getEachStable().get("Stable 1").get(0).disMount();
-        baronsFarmInstance.getAllFarmStables().getEachStable().get("Stable 1").get(0).disMount();
+        baronsFarmInstance.getStable("Stable 1").get(0).disMount();
+        baronsFarmInstance.getStable("Stable 1").get(0).disMount();
     }
 
     @Test
     public void rideAllHorses() {
-        Farmer baron = (Farmer) baronsFarmInstance.getFarmHouse().getPersons().get(0);
-        baron.rideAllHorses(baronsFarmInstance.getAllFarmStables().getEachStable().get("Stable 1"), baron);
+        Farmer baron = (Farmer) baronsFarmInstance.getPerson("Baron");
+        baron.rideAllHorses(baronsFarmInstance.getStable("Stable 1"), baron);
 
-        Baroness baroness = (Baroness) baronsFarmInstance.getFarmHouse().getPersons().get(1);
-        baroness.rideAllHorses(baronsFarmInstance.getAllFarmStables().getEachStable().get("Stable 2"), baroness);
+        Baroness baroness = (Baroness) baronsFarmInstance.getPerson("Baroness");
+        baroness.rideAllHorses(baronsFarmInstance.getStable("Stable 2"), baroness);
 
-        baron.rideAllHorses(baronsFarmInstance.getAllFarmStables().getEachStable().get("Stable 3"), baron);
+        baron.rideAllHorses(baronsFarmInstance.getStable("Stable 3"), baron);
     }
 
     @Test
     public void testFeedHorses() {
-        Farmer baron = (Farmer) baronsFarmInstance.getFarmHouse().getPersons().get(0);
+        Farmer baron = (Farmer) baronsFarmInstance.getPerson("Baron");
 
-        baron.feedHorses(baronsFarmInstance.getAllFarmStables().getEachStable().get("Stable 1"));
-        baron.feedHorses(baronsFarmInstance.getAllFarmStables().getEachStable().get("Stable 2"));
-        baron.feedHorses(baronsFarmInstance.getAllFarmStables().getEachStable().get("Stable 3"));
+        baron.feedHorses(baronsFarmInstance.getStable("Stable 1"));
+        baron.feedHorses(baronsFarmInstance.getStable("Stable 2"));
+        baron.feedHorses(baronsFarmInstance.getStable("Stable 3"));
 
     }
 
     @Test
     public void testGetHorseFunction() {
-        Farmer baron = (Farmer) baronsFarmInstance.getFarmHouse().getPersons().get(0);
+        Farmer baron = (Farmer) baronsFarmInstance.getPerson("Baron");
 
-        String actual = baron.getHorse("Odi", baronsFarmInstance.getAllFarmStables().getEachStable().get("Stable 1")).getName();
+        String actual = baron.getHorse("Odi", baronsFarmInstance.getStable("Stable 1")).getName();
         System.out.println(actual);
         String expected = "Odi";
 
@@ -100,7 +100,7 @@ public class MainApplicationTest {
 
     @Test
     public void getCropsFromFields() {
-        CornStalk cornStalk = (CornStalk) baronsFarmInstance.getFarmFields().getFields().get("Row1").getCropRow().get(0);
+        CornStalk cornStalk = (CornStalk) baronsFarmInstance.getCrops("Row1").get(0);
         String actual = cornStalk.toString();
 
         System.out.println(actual);
@@ -109,8 +109,8 @@ public class MainApplicationTest {
 
     @Test
     public void testGetEggFAIL() {
-        Farmer baron = (Farmer) baronsFarmInstance.getFarmHouse().getPersons().get(0);
-        Chicken chicken = baronsFarmInstance.getAllChickenCoops().getCoop().get("Chicken Coop 1").get(0);
+        Farmer baron = (Farmer) baronsFarmInstance.getPerson("Baron");
+        Chicken chicken = baronsFarmInstance.getChickenCoop("Chicken Coop 1").get(0);
         baron.addRooster(chicken);
         Egg actual = (Egg) chicken.yield();
 
@@ -120,7 +120,7 @@ public class MainApplicationTest {
 
     @Test
     public void testGetEgg() {
-        Chicken chicken = baronsFarmInstance.getAllChickenCoops().getCoop().get("Chicken Coop 1").get(0);
+        Chicken chicken = baronsFarmInstance.getChickenCoop("Chicken Coop 1").get(0);
         Egg egg = (Egg) chicken.yield();
 
         System.out.println(egg);
@@ -134,11 +134,11 @@ public class MainApplicationTest {
 
     @Test
     public void testFeedBaronBaroness() {
-        Farmer baron = (Farmer) baronsFarmInstance.getFarmHouse().getPersons().get(0);
-        Baroness baroness = (Baroness) baronsFarmInstance.getFarmHouse().getPersons().get(1);
+        Farmer baron = (Farmer) baronsFarmInstance.getPerson("Baron");
+        Baroness baroness = (Baroness) baronsFarmInstance.getPerson("Baroness");
 
-        CropRow cropRow1 = baronsFarmInstance.getFarmFields().getFields().get("Row1");
-        CropRow cropRow2 = baronsFarmInstance.getFarmFields().getFields().get("Row2");
+        CropRow cropRow1 = baronsFarmInstance.getCropRow("Row1");
+        CropRow cropRow2 = baronsFarmInstance.getCropRow("Row2");
 
         CropDuster cropDuster = (CropDuster) baronsFarmInstance.getFarmVehicleShed().get(1);
         cropDuster.fly(baroness);
@@ -147,17 +147,15 @@ public class MainApplicationTest {
         cropDuster.land();
 
         Tractor tractor = (Tractor) baronsFarmInstance.getFarmVehicleShed().get(0);
-        ArrayList<Crop> crops1 = baronsFarmInstance.getCrops("Row1");
-        ArrayList<Crop> crops2 = baronsFarmInstance.getCrops("Row2");
 
         tractor.operate(baronsFarmInstance);
 
-        ArrayList<Crop> harvestedCrops = (ArrayList<Crop>) tractor.harvest(crops1);
-        ArrayList<Crop> harvestedCrops2 = (ArrayList<Crop>) tractor.harvest(crops2);
+        CropRow harvestedCrops = tractor.harvest(cropRow1);
+        CropRow harvestedCrops2 = tractor.harvest(cropRow2);
         tractor.turnOff();
 
-        Corn corn = (Corn) harvestedCrops.get(0);
-        Tomato tomato = (Tomato) harvestedCrops2.get(0);
+        Corn corn = (Corn) harvestedCrops.getCropRow().get(0);
+        Tomato tomato = (Tomato) harvestedCrops2.getCropRow().get(0);
 
         Chicken chicken = baronsFarmInstance.getChickenCoop("Chicken Coop 1").get(0);
         Egg egg = (Egg) chicken.yield();
@@ -177,7 +175,7 @@ public class MainApplicationTest {
 
     @Test
     public void testPlantExisting() {
-        Farmer baron = (Farmer) baronsFarmInstance.getFarmHouse().getPersons().get(0);
+        Farmer baron = (Farmer) baronsFarmInstance.getPerson("Baron");
         baronsFarmInstance.getCrops("Row1").clear();
         baron.plant(new Tomato(), baronsFarmInstance.getCrops("Row1"));
 
@@ -190,7 +188,7 @@ public class MainApplicationTest {
 
     @Test
     public void testPlantNewCropRow() {
-        Farmer baron = (Farmer) baronsFarmInstance.getFarmHouse().getPersons().get(0);
+        Farmer baron = (Farmer) baronsFarmInstance.getPerson("Baron");
         baronsFarmInstance.getCrops("Row1").clear();
         baron.plant(new Tomato(), baronsFarmInstance.getCrops("Row1"));
 
@@ -203,7 +201,7 @@ public class MainApplicationTest {
 
     @Test
     public void testSunday() {
-        Farmer baron = (Farmer) baronsFarmInstance.getFarmHouse().getPersons().get(0);
+        Farmer baron = (Farmer) baronsFarmInstance.getPerson("Baron");
         baronsFarmInstance.getCrops("Row1").clear();
         baronsFarmInstance.getCrops("Row2").clear();
 
@@ -224,7 +222,7 @@ public class MainApplicationTest {
 
     @Test
     public void testFlyAndLandCropDuster() {
-        Baroness baroness = (Baroness) baronsFarmInstance.getFarmHouse().getPersons().get(1);
+        Baroness baroness = (Baroness) baronsFarmInstance.getPerson("Baroness");
         CropDuster cropDuster = (CropDuster) baronsFarmInstance.getFarmVehicleShed().get(1);
         cropDuster.fly(baroness);
 
@@ -247,9 +245,9 @@ public class MainApplicationTest {
 
     @Test
     public void testMonday() {
-        Baroness baroness = (Baroness) baronsFarmInstance.getFarmHouse().getPersons().get(1);
+        Baroness baroness = (Baroness) baronsFarmInstance.getPerson("Baroness");
 
-        CropRow cropRow2 = baronsFarmInstance.getFarmFields().getFields().get("Row2");
+        CropRow cropRow2 = baronsFarmInstance.getCropRow("Row2");
 
         CropDuster cropDuster = (CropDuster) baronsFarmInstance.getFarmVehicleShed().get(1);
         cropDuster.fly(baroness);
@@ -273,7 +271,7 @@ public class MainApplicationTest {
     @Test
     public void testTuesday() {
         //Sunday
-        Farmer baron = (Farmer) baronsFarmInstance.getFarmHouse().getPersons().get(0);
+        Farmer baron = (Farmer) baronsFarmInstance.getPerson("Baron");
         baronsFarmInstance.getCrops("Row1").clear();
         baronsFarmInstance.getCrops("Row2").clear();
 
@@ -285,10 +283,10 @@ public class MainApplicationTest {
         baron.plant(new KalePlant(), baronsFarmInstance.getCrops("Row3"));
 
         //Monday
-        Baroness baroness = (Baroness) baronsFarmInstance.getFarmHouse().getPersons().get(1);
+        Baroness baroness = (Baroness) baronsFarmInstance.getPerson("Baroness");
 
-        CropRow cropRow1 = baronsFarmInstance.getFarmFields().getFields().get("Row1");
-        CropRow cropRow2 = baronsFarmInstance.getFarmFields().getFields().get("Row2");
+        CropRow cropRow1 = baronsFarmInstance.getCropRow("Row1");
+        CropRow cropRow2 = baronsFarmInstance.getCropRow("Row2");
 
         CropDuster cropDuster = (CropDuster) baronsFarmInstance.getFarmVehicleShed().get(1);
         cropDuster.fly(baroness);
@@ -299,19 +297,40 @@ public class MainApplicationTest {
         //Tuesday
         Tractor tractor = (Tractor) baronsFarmInstance.getFarmVehicleShed().get(0);
 
-        // TODO: 12/12/20 commandLine game out of this...
-        //TODO Add a chicken when BoBo the rooster visits a Chicken.
-
-        ArrayList<Crop> crops1 = baronsFarmInstance.getCrops("Row1");
-        ArrayList<Crop> crops2 = baronsFarmInstance.getCrops("Row2");
-
         tractor.operate(baronsFarmInstance);
-        ArrayList<Crop> harvestedCrops = (ArrayList<Crop>) tractor.harvest(crops1);
-        ArrayList<Crop> harvestedCrops2 = (ArrayList<Crop>) tractor.harvest(crops2);
+        // TODO: 12/12/20
+        CropRow harvestedCrops = tractor.harvest(cropRow1);
+        CropRow harvestedCrops2 =  tractor.harvest(cropRow2);
         tractor.turnOff();
 
         Assert.assertNotNull(harvestedCrops);
     }
 
+    @Test
+    public void testHasBeenHarvested() {
+        Baroness baroness = (Baroness) baronsFarmInstance.getPerson("Baroness");
+
+        CropRow cropRow1 = baronsFarmInstance.getCropRow("Row1");
+        CropRow cropRow2 = baronsFarmInstance.getCropRow("Row2");
+
+        CropDuster cropDuster = (CropDuster) baronsFarmInstance.getFarmVehicleShed().get(1);
+        cropDuster.fly(baroness);
+        cropDuster.fertilize(cropRow1);
+        cropDuster.fertilize(cropRow2);
+        cropDuster.land();
+
+        //Tuesday
+        Tractor tractor = (Tractor) baronsFarmInstance.getFarmVehicleShed().get(0);
+
+        tractor.operate(baronsFarmInstance);
+        tractor.harvest(cropRow1);
+        tractor.harvest(cropRow2);
+        tractor.turnOff();
+
+        Boolean actual = cropRow1.getCropRow().get(0).getHasBeenHarvested();
+        System.out.println(actual);
+
+        Assert.assertEquals(true, actual);
+    }
 
 }
