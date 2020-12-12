@@ -25,8 +25,6 @@ public class Farmer extends Person implements Botanist, Eater, Rider {
         return null;
     }
 
-    //// TODO: 12/11/20 Need to figure out how to implement the yield method in crop here...
-
     public List<Edible> harvestCrop(CropRow cropRow) {
     return null;
     }

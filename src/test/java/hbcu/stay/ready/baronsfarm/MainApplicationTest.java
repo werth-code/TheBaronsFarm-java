@@ -273,6 +273,8 @@ public class MainApplicationTest {
         //Tuesday
         Tractor tractor = (Tractor) baronsFarmInstance.getFarmVehicleShed().get(0);
 
+        //TODO  this is a new function to make it easier to access crop rows.. Improve existing code and clean up methods.. Make commandLine game out of this...
+        //TODO Add a chicken when BoBo the rooster visits a Chicken.
         ArrayList<Crop> crops1 = baronsFarmInstance.getCrops("Row1");
 
         tractor.operate(baronsFarmInstance);
