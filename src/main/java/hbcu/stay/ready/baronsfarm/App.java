@@ -97,4 +97,8 @@ public class App {
         System.out.println(baronsFarm.getAllFarmStables().getEachStable().get("Stable 1").get(0).getName());
 
     }
+
+    static void message() {
+        System.out.println("Hi");
+    }
 }

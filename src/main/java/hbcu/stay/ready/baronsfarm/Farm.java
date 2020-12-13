@@ -1,9 +1,7 @@
 package hbcu.stay.ready.baronsfarm;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class Farm {
 
@@ -14,9 +12,7 @@ public class Farm {
     private Field field;
     private List<FarmVehicle> farmVehicleShed;
 
-    Farm(String name) {
-        this.name = name;
-    }
+    Farm(){};
 
     Farm(String farmName, FarmHouse farmHouse, Stables stables, ChickenCoop chickenCoop, Field field) {
         this.name = farmName;
@@ -27,32 +23,34 @@ public class Farm {
         farmVehicleShed = new ArrayList<>();
     }
 
-    public void listStables() {
-        HashMap<String, ArrayList<Horse>> stables = this.stables.getEachStable();
-        for(Object horses : stables.entrySet()) {
-            System.out.println(horses);
-        }
-    }
-
-    public Stables getStables() {
-        HashMap<String, ArrayList<Horse>> stables = this.stables.getEachStable();
-        for(Object horses : stables.entrySet()) {
-            return (Stables) horses;
-        }
-        return null;
-    }
-
-    public Horse getHorse(String name, ArrayList<Horse> horses) {
-        for(Horse horse : horses) {
-            if(horse.getName() == name) return horse;
-            break;
-        }
-        return null;
+    public CropRow getCropRow(String rowName) {
+       return this.getFarmFields().getField().get(rowName);
     }
 
     public ArrayList<Crop> getCrops(String rowName) {
-       return this.getFarmFields().getFields().get(rowName).getCropRow();
+       return this.getFarmFields().getField().get(rowName).getCropRow();
     }
+
+    public ArrayList<Chicken> getChickenCoop(String coopName) {
+        return this.getAllChickenCoops().getCoop().get(coopName);
+    }
+
+    public ArrayList<Horse> getStable(String stableName) {
+        return this.getAllFarmStables().getEachStable().get(stableName);
+    }
+
+    public Person getPerson(String name){
+        List<Person> getIndex = this.getFarmHouse().getPersons();
+        for(Person person : getIndex) {
+            if(person.getName() == name) return person;
+        }
+       return null;
+    }
+
+    public Field getFarmFields() {
+        return field;
+    }
+
 
     public List<FarmVehicle> getFarmVehicleShed() {
         return farmVehicleShed;
@@ -76,10 +74,6 @@ public class Farm {
 
     public ChickenCoop getAllChickenCoops() {
         return chickenCoop;
-    }
-
-    public Field getFarmFields() {
-        return field;
     }
 
 }
