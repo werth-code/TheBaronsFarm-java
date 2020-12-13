@@ -1,8 +1,5 @@
 package hbcu.stay.ready.baronsfarm;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class Tractor implements FarmVehicle {
     private Boolean isOperating = false;
 
@@ -23,7 +20,7 @@ public class Tractor implements FarmVehicle {
         for(Crop crop : crops.getCropRow()) {
             harvestedCrops.addCrop(crop.yield());
         }
-        System.out.println("Harvesting... Vegetables" + harvestedCrops.toString());
+        System.out.println("Harvesting... " + harvestedCrops.toString());
         return harvestedCrops;
     }
 

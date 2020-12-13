@@ -28,7 +28,7 @@ public class Baron extends Farmer  {
         }
 
         Field field = new Field("Row1", cropRow);
-        field.getFields().put("Row2", cropRow2);
+        field.getField().put("Row2", cropRow2);
 
         //Create FarmHouse
         List<Person> baronsFarmHouse = Arrays.asList(baron, baroness);

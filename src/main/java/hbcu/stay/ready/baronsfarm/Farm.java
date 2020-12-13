@@ -24,11 +24,11 @@ public class Farm {
     }
 
     public CropRow getCropRow(String rowName) {
-       return this.getFarmFields().getFields().get(rowName);
+       return this.getFarmFields().getField().get(rowName);
     }
 
     public ArrayList<Crop> getCrops(String rowName) {
-       return this.getFarmFields().getFields().get(rowName).getCropRow();
+       return this.getFarmFields().getField().get(rowName).getCropRow();
     }
 
     public ArrayList<Chicken> getChickenCoop(String coopName) {

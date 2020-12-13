@@ -30,6 +30,7 @@ public class MainApplicationTest {
         Assert.assertEquals(expected, actual);
     }
 
+
     @Test
     public void testMountHorse() {
         Farmer baron = (Farmer) baronsFarmInstance.getPerson("Baron");
@@ -51,7 +52,7 @@ public class MainApplicationTest {
     }
 
     @Test
-    public void testDismount() {
+    public void testDismountHorse() {
         Farmer baron = (Farmer) baronsFarmInstance.getPerson("Baron");
         baronsFarmInstance.getStable("Stable 1").get(0).mount(baron);
         baronsFarmInstance.getStable("Stable 1").get(0).disMount();
@@ -209,7 +210,7 @@ public class MainApplicationTest {
         baron.plant(new TomatoPlant(), baronsFarmInstance.getCrops("Row2"));
 
         CropRow kale = new CropRow();
-        baronsFarmInstance.getFarmFields().getFields().put("Row3", kale);
+        baronsFarmInstance.getFarmFields().getField().put("Row3", kale);
         baron.plant(new KalePlant(), baronsFarmInstance.getCrops("Row3"));
 
         String actual = baronsFarmInstance.getCrops("Row3").get(12).toString();
@@ -231,6 +232,15 @@ public class MainApplicationTest {
 
         System.out.println(actual);
         Assert.assertEquals(expected, actual);
+    }
+
+    // TODO: 12/12/20 Is there a way to test an error? I want the error. 
+    @Test
+    public void testFlyWhenNotPilot(){
+        Farmer farmer = new Farmer("Jake");
+        CropDuster cropDuster = new CropDuster();
+        System.out.println("Uncomment to see error");
+        //cropDuster.fly((Pilot) farmer);
     }
 
     @Test
@@ -279,7 +289,7 @@ public class MainApplicationTest {
         baron.plant(new TomatoPlant(), baronsFarmInstance.getCrops("Row2"));
 
         CropRow kale = new CropRow();
-        baronsFarmInstance.getFarmFields().getFields().put("Row3", kale);
+        baronsFarmInstance.getFarmFields().getField().put("Row3", kale);
         baron.plant(new KalePlant(), baronsFarmInstance.getCrops("Row3"));
 
         //Monday
@@ -287,11 +297,13 @@ public class MainApplicationTest {
 
         CropRow cropRow1 = baronsFarmInstance.getCropRow("Row1");
         CropRow cropRow2 = baronsFarmInstance.getCropRow("Row2");
+        CropRow cropRow3 = baronsFarmInstance.getCropRow("Row3");
 
         CropDuster cropDuster = (CropDuster) baronsFarmInstance.getFarmVehicleShed().get(1);
         cropDuster.fly(baroness);
         cropDuster.fertilize(cropRow1);
         cropDuster.fertilize(cropRow2);
+        cropDuster.fertilize(cropRow3);
         cropDuster.land();
 
         //Tuesday
@@ -301,6 +313,7 @@ public class MainApplicationTest {
         // TODO: 12/12/20
         CropRow harvestedCrops = tractor.harvest(cropRow1);
         CropRow harvestedCrops2 =  tractor.harvest(cropRow2);
+        CropRow harvestedCrops3 = tractor.harvest(cropRow3);
         tractor.turnOff();
 
         Assert.assertNotNull(harvestedCrops);
