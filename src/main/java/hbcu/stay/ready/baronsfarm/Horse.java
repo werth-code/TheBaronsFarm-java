@@ -34,12 +34,17 @@ public class Horse extends Animal implements Rideable {
 
     @Override
     public void canEat(Edible edible) {
-        System.out.println("...chomp...crunch...num... " + super.getName().toUpperCase() + " likes " + edible.toString());
+        System.out.println("...chomp...crunch...num... " + super.getName().toUpperCase() + " really likes " + edible.toString());
     }
 
     @Override
     public void makeNoise() {
-        System.out.println("...Naaaayyyyyyyyy!");
+        System.out.println(super.getName() + " says ...Naaaayyyyyyyyy!");
+    }
+
+    @Override
+    public String toString() {
+        return "Horse " + super.getName();
     }
 
 }

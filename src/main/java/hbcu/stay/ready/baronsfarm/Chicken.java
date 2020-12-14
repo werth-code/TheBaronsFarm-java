@@ -13,7 +13,7 @@ public class Chicken extends Animal implements Produce, NoiseMaker {
     }
 
     public void makeNoise() {
-        System.out.println(super.getName() + "...cluck...cluck...");
+        System.out.println(super.getName() + " says ...cluck...cluck...");
     }
 
     public Edible yield() {
@@ -31,4 +31,8 @@ public class Chicken extends Animal implements Produce, NoiseMaker {
         return null;
     }
 
+    @Override
+    public String toString() {
+        return "Chicken " + super.getName();
+    }
 }
