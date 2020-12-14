@@ -234,7 +234,7 @@ public class MainApplicationTest {
         Assert.assertEquals(expected, actual);
     }
 
-    // TODO: 12/12/20 Is there a way to test an error? I want the error. 
+    // TODO: 12/12/20 Is there a way to test an error? I want the error.
     @Test
     public void testFlyWhenNotPilot(){
         Farmer farmer = new Farmer("Jake");
@@ -344,6 +344,13 @@ public class MainApplicationTest {
         System.out.println(actual);
 
         Assert.assertEquals(true, actual);
+    }
+
+
+    @Test
+    public void testPlayFarm() {
+        Baron baron = new Baron("User");
+        baron.playFarm();
     }
 
 }

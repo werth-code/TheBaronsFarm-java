@@ -9,7 +9,7 @@ public class Chicken extends Animal implements Produce, NoiseMaker {
     public Boolean hasBeenFertilized = false;
 
     public void canEat(Edible edible) {
-        System.out.println(edible + " falls to ground...cluck...cluck...yum");
+        System.out.println("...cluck...cluck...yum... " + super.getName().toUpperCase() + " likes " + edible.toString());
     }
 
     public void makeNoise() {
