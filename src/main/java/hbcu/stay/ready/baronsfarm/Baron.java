@@ -1,7 +1,5 @@
 package hbcu.stay.ready.baronsfarm;
 
-//// TODO: 12/9/20 already inherits rider from Farmer->Person
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -84,6 +82,20 @@ public class Baron extends Farmer  {
         return farm;
     }
 
+    public void getAllAnimals(Farm farm) {
+        System.out.println("...Let's Start With Our Horses..");
+        farm.getStable("Stable 1").forEach(horse -> System.out.println(horse.getName()));
+        System.out.println("...(Ol BARON Says)...Did You Know BARBER Was Backup To A Stand-In For The Kentucky Derby?");
+        farm.getStable("Stable 2").forEach(horse -> System.out.println(horse.getName()));
+        farm.getStable("Stable 3").forEach(horse -> System.out.println(horse.getName()));
+
+        System.out.println("...Next We Have The Chickens...");
+        farm.getChickenCoop("Chicken Coop 1").forEach(chicken -> System.out.println(chicken.getName()));
+        System.out.println("...(Ol BARON Says)...Funny Story Bout Ol HENNIFERLOPEZ. Fought Off A Fox Once..(story was long and you lost interest...)");
+        farm.getChickenCoop("Chicken Coop 2").forEach(chicken -> System.out.println(chicken.getName()));
+        farm.getChickenCoop("Chicken Coop 3").forEach(chicken -> System.out.println(chicken.getName()));
+    }
+
     public void mainMenu() {
         // TODO: 12/14/20 createCharacter which creates a character with different implementations based on user selection... like wants to fly, needs pilot interface.
         System.out.println("\n--- Welcome To Baron Farms! ---");
@@ -131,18 +143,11 @@ public class Baron extends Farmer  {
 
             switch (baronInput) {
                 case "1":
-                    Tractor tractor = (Tractor) farm.getFarmVehicleShed().get(0);
-                    tractor.operate(farm);
 
-                    CropRow cropRow1 = farm.getCropRow("Row1");
-                    CropRow cropRow2 = farm.getCropRow("Row2");
+                    getAllAnimals(farm);
+                    System.out.println();
+                    String input = scanner.next();
 
-                    CropRow harvestedCrops = tractor.harvest(cropRow1);
-                    CropRow harvestedCrops2 = tractor.harvest(cropRow2);
-                    tractor.turnOff();
-
-                    Corn corn = (Corn) harvestedCrops.getCropRow().get(0);
-                    Tomato tomato = (Tomato) harvestedCrops2.getCropRow().get(0);
 
                     innerFlag = false;
                     playFarm();
@@ -268,26 +273,18 @@ public class Baron extends Farmer  {
                     break;
                 case "3" :
                     baronessMenu(farm);
-                    input = scanner.next();
-                    if(input.equals("1")) {
-                        feedAnimalMenu(farm, getRandomHorse(farm));
-                    }
                     break;
                 case "4" :
                     takeTourMenu(farm);
-                    input = scanner.next();
-                    if(input.equals("1")) {
-                        feedAnimalMenu(farm, getRandomHorse(farm));
-                    }
                     break;
                 case "exit" :
                 default:
                     System.out.println("Have A Farmin Good Day!!");
                     flag = false;
+                    scanner.close();
                     break;
             }
         }
-        scanner.close();
     }
 
 }
