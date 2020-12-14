@@ -14,4 +14,11 @@ public class Stables {
     public HashMap<String, ArrayList<Horse>> getEachStable() {
         return stable;
     }
+
+    @Override
+    public String toString() {
+        return "Stables{" +
+                "stable=" + stable +
+                '}';
+    }
 }

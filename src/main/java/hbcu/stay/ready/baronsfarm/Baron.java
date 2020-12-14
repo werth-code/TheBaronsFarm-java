@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Baron extends Farmer  {
-    private Scanner scanner;
+    private final Scanner scanner;
     public Baron(String name) {
         super(name);
         scanner = new Scanner(System.in);
@@ -84,15 +84,22 @@ public class Baron extends Farmer  {
 
     public void getAllAnimals(Farm farm) {
         System.out.println("...Let's Start With Our Horses..");
+        System.out.println("Here Is Stable 1.. " + farm.getStable("Stable 1"));
         farm.getStable("Stable 1").forEach(horse -> System.out.println(horse.getName()));
         System.out.println("...(Ol BARON Says)...Did You Know BARBER Was Backup To A Stand-In For The Kentucky Derby?");
+
+        System.out.println("Here Is Stable 2.. " + farm.getStable("Stable 2"));
         farm.getStable("Stable 2").forEach(horse -> System.out.println(horse.getName()));
+        System.out.println("Here Is Stable 3.. " + farm.getStable("Stable 3"));
         farm.getStable("Stable 3").forEach(horse -> System.out.println(horse.getName()));
 
         System.out.println("...Next We Have The Chickens...");
+        System.out.println("Here Is Chicken Coop 1 "+farm.getChickenCoop("Chicken Coop 1"));
         farm.getChickenCoop("Chicken Coop 1").forEach(chicken -> System.out.println(chicken.getName()));
         System.out.println("...(Ol BARON Says)...Funny Story Bout Ol HENNIFERLOPEZ. Fought Off A Fox Once..(story was long and you lost interest...)");
+        System.out.println("Here Is Chicken Coop 2 "+farm.getChickenCoop("Chicken Coop 2"));
         farm.getChickenCoop("Chicken Coop 2").forEach(chicken -> System.out.println(chicken.getName()));
+        System.out.println("Here Is Chicken Coop 3 "+farm.getChickenCoop("Chicken Coop 3"));
         farm.getChickenCoop("Chicken Coop 3").forEach(chicken -> System.out.println(chicken.getName()));
     }
 
@@ -121,8 +128,7 @@ public class Baron extends Farmer  {
         int mn = 0;
         int mx = farm.getChickenCoop("Chicken Coop 1").size();
         int randomNumber = (int)(Math.random() * (mx - mn) + mn);
-        Chicken chicken = farm.getChickenCoop("Chicken Coop 1").get(randomNumber);
-        return chicken;
+        return farm.getChickenCoop("Chicken Coop 1").get(randomNumber);
     }
 
     public Horse getRandomHorse(Farm farm) {
