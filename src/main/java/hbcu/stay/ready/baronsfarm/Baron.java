@@ -145,9 +145,27 @@ public class Baron extends Farmer  {
                 case "1":
 
                     getAllAnimals(farm);
-                    System.out.println();
+                    System.out.println("\nDo You Want To See If We Have Any Eggs?");
+                    System.out.println("(1) Yes. (2) Do You Have A Rooster? (3) Please No.. Let Me Off This Tour!!!");
                     String input = scanner.next();
 
+                    if(input.equalsIgnoreCase("1")) {
+                        Egg egg = (Egg) farm.getChickenCoop("Chicken Coop 1").get(0).yield();
+                        System.out.println("...Ol Baron Picks Up An Egg...");
+                        baron.canEat(egg);
+                        System.out.println("...(Ol Baron Says)...Probably Should Have Cooked That First...");
+                    } else if(input.equalsIgnoreCase("2")) {
+                        Chicken chicken = farm.getChickenCoop("Chicken Coop 1").get(0);
+                        addRooster(chicken);
+                        System.out.println("...(Ol Baron Says)...Oh Yes, We Do! Mr. BoBo Our Rooster Stops By Sometimes...");
+                        System.out.println("...(Ol Baron Says)...That Must Be Why This Egg Is Hatching!...");
+                        System.out.println("...(Ol Baron Says)...What Should We Name This New Chick?...");
+                        input = scanner.next();
+                        Chicken newChick = chicken.spawn(input);
+                        farm.getChickenCoop("Chicken Coop 1").add(newChick);
+                        farm.getChickenCoop("Chicken Coop 1").forEach(ch-> System.out.println(ch.getName()));
+                        newChick.makeNoise();
+                    }
 
                     innerFlag = false;
                     playFarm();

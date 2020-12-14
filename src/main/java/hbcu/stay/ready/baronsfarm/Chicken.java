@@ -13,13 +13,20 @@ public class Chicken extends Animal implements Produce, NoiseMaker {
     }
 
     public void makeNoise() {
-        System.out.println("Cluck.. cluck..");
+        System.out.println(super.getName() + "...cluck...cluck...");
     }
 
     public Edible yield() {
         if(!hasBeenFertilized) {
             Egg egg = new Egg();
             return egg;
+        }
+        return null;
+    }
+
+    public Chicken spawn(String name) {
+        if(hasBeenFertilized) {
+            return new Chicken(name);
         }
         return null;
     }
