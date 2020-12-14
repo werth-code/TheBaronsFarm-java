@@ -20,7 +20,7 @@ public class CropDuster implements AirCraft, FarmVehicle{
     }
 
     public Pilot land() {
-        System.out.println("....BUMP...BUmp...bump... Landed Safely");
+        System.out.println("....BUMP...BUmp...bump... Fertilized All Crops & Landed Safely.");
         flying = false;
         return pilot;
     }

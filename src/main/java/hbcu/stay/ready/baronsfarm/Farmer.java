@@ -41,7 +41,7 @@ public class Farmer extends Person implements Botanist, Eater, Rider {
         return null;
     }
 
-    public void addRooster(Chicken chicken) {
+    public static void addRooster(Chicken chicken) {
         chicken.hasBeenFertilized = true;
     }
 
