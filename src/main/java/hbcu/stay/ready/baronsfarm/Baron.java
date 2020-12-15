@@ -82,26 +82,6 @@ public class Baron extends Farmer  {
         return farm;
     }
 
-    public void getAllAnimals(Farm farm) {
-        System.out.println("...Let's Start With Our Horses..");
-        System.out.println("Here Is Stable 1.. " + farm.getStable("Stable 1"));
-        farm.getStable("Stable 1").forEach(horse -> System.out.println(horse.getName()));
-        System.out.println("...(Ol BARON Says)...Did You Know BARBER Was Backup To A Stand-In For The Kentucky Derby?");
-
-        System.out.println("Here Is Stable 2.. " + farm.getStable("Stable 2"));
-        farm.getStable("Stable 2").forEach(horse -> System.out.println(horse.getName()));
-        System.out.println("Here Is Stable 3.. " + farm.getStable("Stable 3"));
-        farm.getStable("Stable 3").forEach(horse -> System.out.println(horse.getName()));
-
-        System.out.println("...Next We Have The Chickens...");
-        System.out.println("Here Is Chicken Coop 1 "+farm.getChickenCoop("Chicken Coop 1"));
-        farm.getChickenCoop("Chicken Coop 1").forEach(chicken -> System.out.println(chicken.getName()));
-        System.out.println("...(Ol BARON Says)...Funny Story Bout Ol HENNIFERLOPEZ. Fought Off A Fox Once..(story was long and you lost interest...)");
-        System.out.println("Here Is Chicken Coop 2 "+farm.getChickenCoop("Chicken Coop 2"));
-        farm.getChickenCoop("Chicken Coop 2").forEach(chicken -> System.out.println(chicken.getName()));
-        System.out.println("Here Is Chicken Coop 3 "+farm.getChickenCoop("Chicken Coop 3"));
-        farm.getChickenCoop("Chicken Coop 3").forEach(chicken -> System.out.println(chicken.getName()));
-    }
 
     public void mainMenu() {
         // TODO: 12/14/20 createCharacter which creates a character with different implementations based on user selection... like wants to fly, needs pilot interface.
@@ -111,7 +91,7 @@ public class Baron extends Farmer  {
         System.out.println("(2) To Feed A Horse.");
         System.out.println("(3) To Watch Baroness Fertilize The Crops.");
         System.out.println("(4) To Take A Tour & See All Of Our Animals.");
-        System.out.println("Or (exit) To Exit.");
+        System.out.println("Or (exit) To Exit.\n");
     }
 
     public void feedChickenMenu() {
@@ -135,8 +115,7 @@ public class Baron extends Farmer  {
         int mn = 0;
         int mx = farm.getStable("Stable 1").size();
         int randomNumber = (int)(Math.random() * (mx - mn) + mn);
-        Horse horse = farm.getStable("Stable 1").get(randomNumber);
-        return horse;
+        return farm.getStable("Stable 1").get(randomNumber);
     }
 
     public void takeTourMenu(Farm farm) {
@@ -149,21 +128,57 @@ public class Baron extends Farmer  {
 
             switch (baronInput) {
                 case "1":
+                    //
+                    System.out.println("...Let's Start With Our Horses..");
+                    System.out.println("\nHere Is Stable 1.. " + farm.getStable("Stable 1"));
+                    farm.getStable("Stable 1").forEach(horse -> System.out.println(horse.getName()));
+                    System.out.println("...(Ol BARON Says)...Did You Know BARBER Was Backup To A Stand-In For The Kentucky Derby.. I Believe It Was In 1999..");
 
-                    getAllAnimals(farm);
+                    System.out.println("Continue The Tour? (1) Yes. (2) No.");
+
+                    String input = scanner.next();
+                    if(input.equals("1")) {
+                        System.out.println("\nHere Is Stable 2.. " + farm.getStable("Stable 2"));
+                        farm.getStable("Stable 2").forEach(horse -> System.out.println(horse.getName()));
+                        System.out.println("\nHere Is Stable 3.. " + farm.getStable("Stable 3"));
+                        farm.getStable("Stable 3").forEach(horse -> System.out.println(horse.getName()));
+                    } else {
+                        innerFlag = false;
+                        break;
+                    }
+
+                    System.out.println("Still Having Fun? (1) Yes. (2) Get Me Out Of Here!");
+
+                    input = scanner.next();
+                    if(input.equals("1")) {
+                        System.out.println("...Next We Have The Chickens...");
+                        System.out.println("\nHere Is Chicken Coop 1 "+farm.getChickenCoop("Chicken Coop 1"));
+                        farm.getChickenCoop("Chicken Coop 1").forEach(chicken -> System.out.println(chicken.getName()));
+                        System.out.println("...(Ol BARON Says)...Funny Story Bout Ol HENNIFERLOPEZ. Fought Off A Fox Once..(story was long and you lost interest...)");
+                        System.out.println("\nHere Is Chicken Coop 2 "+farm.getChickenCoop("Chicken Coop 2"));
+                        farm.getChickenCoop("Chicken Coop 2").forEach(chicken -> System.out.println(chicken.getName()));
+                        System.out.println("\nHere Is Chicken Coop 3 "+farm.getChickenCoop("Chicken Coop 3"));
+                        farm.getChickenCoop("Chicken Coop 3").forEach(chicken -> System.out.println(chicken.getName()));
+                    } else {
+                        innerFlag = false;
+                        break;
+                    }
+
                     System.out.println("\nDo You Want To See If We Have Any Eggs?");
                     System.out.println("(1) Yes. (2) Do You Have A Rooster? (3) Please No.. Let Me Off This Tour!!!");
-                    String input = scanner.next();
+                    String input2 = scanner.next();
 
-                    if(input.equalsIgnoreCase("1")) {
+                    if(input2.equalsIgnoreCase("1")) {
                         Egg egg = (Egg) farm.getChickenCoop("Chicken Coop 1").get(0).yield();
                         System.out.println("...Ol Baron Picks Up An Egg...");
                         baron.canEat(egg);
                         System.out.println("...(Ol Baron Says)...Probably Should Have Cooked That First...");
-                    } else if(input.equalsIgnoreCase("2")) {
+                    }
+
+                    else if(input2.equalsIgnoreCase("2")) {
                         Chicken chicken = farm.getChickenCoop("Chicken Coop 1").get(0);
                         addRooster(chicken);
-                        System.out.println("...(Ol Baron Says)...Oh Yes, We Do! Mr. BoBo Our Rooster Stops By Sometimes...");
+                        System.out.println("...(Ol Baron Says)...Oh Yes, We Do! BoBo Our Rooster Stops By Sometimes...");
                         System.out.println("...(Ol Baron Says)...That Must Be Why This Egg Is Hatching!...");
                         System.out.println("...(Ol Baron Says)...What Should We Name This New Chick?...");
                         input = scanner.next();
@@ -219,6 +234,8 @@ public class Baron extends Farmer  {
 
                         Corn corn = (Corn) harvestedCrops.getCropRow().get(0);
                         Tomato tomato = (Tomato) harvestedCrops2.getCropRow().get(0);
+                        baron.canEat(corn);
+                        baroness.canEat(tomato);
                     }
 
                     playFarm();
@@ -244,7 +261,9 @@ public class Baron extends Farmer  {
 
             switch (animalInput) {
                 case "1":
-                    System.out.println("Would You Like To Feed "+ "'" + animal.getName() + "'" + " Corn: (1)  Or Tomatoes: (2)");
+                    System.out.println("Oh Look At This Beautiful " + animal.toString() + "!");
+                    animal.makeNoise();
+                    System.out.println("Feed "+ "'" + animal.getName() + "'" + " Corn: (1)  Or Tomatoes: (2)");
                     String input = scanner.next();
                     if(input.equalsIgnoreCase("1")) {
                         Corn corn = new Corn();
@@ -276,7 +295,6 @@ public class Baron extends Farmer  {
 
             if (input.equalsIgnoreCase("exit")) {
                 System.out.println("Have A Farmin Great Day!");
-                flag = false;
                 break;
             }
 
