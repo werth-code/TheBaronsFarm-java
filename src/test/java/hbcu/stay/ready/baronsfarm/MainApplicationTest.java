@@ -3,6 +3,8 @@ package hbcu.stay.ready.baronsfarm;
 import org.junit.Assert;
 import org.junit.Test;
 
+//// TODO: 12/15/20 <<<<< USE APP CLASS TO RUN COMMAND LINE FARM GAME >>>>>
+
 public class MainApplicationTest {
     Farm baronsFarmInstance = Baron.buildBaronsFarm();
 
